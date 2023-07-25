@@ -1,17 +1,18 @@
 {
-  "name": "mabesi-nft-collection",
+  "name": "mabesi-azuki-nft",
   "version": "1.0.0",
-  "description": "Mabesi NFT Collection",
+  "description": "Mabesi Azuki NFT",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test",
+    "cov": "npx hardhat coverage"
   },
   "keywords": [],
-  "author": "",
+  "author": "Plinio Mabesi",
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "@openzeppelin/contracts": "^4.9.2",
+    "erc721a": "^4.2.3",
     "hardhat": "^2.17.0"
   }
 }

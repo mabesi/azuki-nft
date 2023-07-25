@@ -2,12 +2,12 @@ import { ethers } from "hardhat";
 
 async function main() {
 
-  const MabesiNFT = await ethers.getContractFactory("MabesiNFT");
-  const cc = await MabesiNFT.deploy();
+  const MabesiAzukiNFT = await ethers.getContractFactory("MabesiAzukiNFT");
+  const cc = await MabesiAzukiNFT.deploy();
 
   await cc.deployed();
 
-  console.log(`Mabesi NFT contract was deployed at ${cc.address}`);
+  console.log(`Mabesi Azuki NFT contract was deployed at ${cc.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

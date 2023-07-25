@@ -2,12 +2,12 @@ import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("MabesiNFT", function () {
+describe("MabesiAzukiNFT", function () {
 
   async function deployFixture() {
     const [owner, user] = await ethers.getSigners();
-    const MabesiNFT = await ethers.getContractFactory("MabesiNFT");
-    const cc = await MabesiNFT.deploy();
+    const MabesiAzukiNFT = await ethers.getContractFactory("MabesiAzukiNFT");
+    const cc = await MabesiAzukiNFT.deploy();
     return { cc, owner, user };
   }
 
