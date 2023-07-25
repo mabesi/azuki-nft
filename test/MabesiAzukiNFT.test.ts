@@ -1,4 +1,4 @@
-import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
@@ -23,7 +23,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should mint", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const balance = await cc.balanceOf(owner.address);
     const tokenId = 0;
     const ownerOf = await cc.ownerOf(tokenId);
@@ -41,7 +41,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await cc.burn(tokenId);
 
@@ -54,7 +54,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn (approved)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
 
@@ -73,7 +73,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn (approved for all)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await cc.setApprovalForAll(user.address, true);
 
@@ -97,7 +97,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should NOT burn (permission)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     const instance = cc.connect(user);
     await expect(instance.burn(tokenId)).to.be.revertedWithCustomError(cc, "TransferCallerNotOwnerNorApproved");
@@ -105,7 +105,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should has URI metadata", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     expect(await cc.tokenURI(tokenId)).to.equal("ipfs://QmPbCf6w9TZdVhroWyBZ6LY2cDkex6Qe7eLiXG3sEUHYWF/0.json", "Can't get URI metadata");
   });
@@ -117,7 +117,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should transfer", async function () {
       const { cc, owner, user } = await loadFixture(deployFixture);
-      await cc.mint(1, {value: ethers.parseEther("0.01")});
+      await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
       const tokenId = 0;
       await  cc.transferFrom(owner.address, user.address, tokenId);
 
@@ -132,7 +132,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit transfer", async function () {
       const { cc, owner, user } = await loadFixture(deployFixture);
-      await cc.mint(1, {value: ethers.parseEther("0.01")});
+      await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
       const tokenId = 0;
       await expect(cc.transferFrom(owner.address, user.address, tokenId)).to
                   .emit(cc, "Transfer")
@@ -142,7 +142,7 @@ describe("MabesiAzukiNFT", function () {
   it("Should transfer (approved)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
 
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
 
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
@@ -158,7 +158,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit approval", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await expect(cc.approve(user.address, tokenId)).to
                 .emit(cc, "Approval")
@@ -167,7 +167,7 @@ describe("MabesiAzukiNFT", function () {
   
   it("Should clear approvals", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
     await  cc.transferFrom(owner.address, user.address, tokenId);
@@ -178,7 +178,7 @@ describe("MabesiAzukiNFT", function () {
   it("Should transfer (approved for all)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
 
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
 
     const tokenId = 0;
     await cc.setApprovalForAll(user.address, true);
@@ -194,7 +194,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit approval for all", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     await expect(cc.setApprovalForAll(user.address, true)).to
                 .emit(cc, "ApprovalForAll")
@@ -204,7 +204,7 @@ describe("MabesiAzukiNFT", function () {
   it("Should NOT transfer (permission)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     
-    await cc.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.mint(1, {value: ethers.utils.parseEther("0.01")});
     const tokenId = 0;
     const instance = cc.connect(user);    
 
@@ -228,9 +228,9 @@ describe("MabesiAzukiNFT", function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     const ownerBalanceBefore = await ethers.provider.getBalance(owner.address);
     const instace = cc.connect(user);
-    await instace.mint(1, {value: ethers.parseEther("0.01")});
+    await instace.mint(1, {value: ethers.utils.parseEther("0.01")});
     await cc.withdraw();
-    const ccBalance = await ethers.provider.getBalance(cc.getAddress());
+    const ccBalance = await ethers.provider.getBalance(cc.address);
     const ownerBalanceAfter = await ethers.provider.getBalance(owner.address);
 
     expect(ccBalance).to.equal(0, "Can't withdraw (ccBalance)");
