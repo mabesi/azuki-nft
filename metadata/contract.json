@@ -1,0 +1,8 @@
+{
+    "name" : "Mabesi Azuki NFT Collection",
+    "description" : "An educational professional ERC-721A NFT Collection by Plinio Mabesi",
+    "image" : "ipfs://QmQfuXQGgLwn1VYJbpF9gZC6LLAYQjWWD4uLxXaJdL5M7J",
+    "external_link" : "https://mabesiazukinftcollection.com",
+    "seller_fee_basis_points" : 100,
+    "fee_recipient" : "0x957339c0b3F129B5AF1DF15A2cAb1301f6799f93"
+}

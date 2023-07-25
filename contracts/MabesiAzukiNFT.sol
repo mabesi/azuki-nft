@@ -36,4 +36,8 @@ contract MabesiAzukiNFT is ERC721A {
         require(success == true, "Failed to withdraw");
     }
 
+    function contractURI() public pure returns (string memory) {
+        return "ipfs://QmQRmf8h6SGBrfBTqBxUzDmzZAfDxjL6scV5bDBJSBmSeP";
+    }
+
 }

@@ -110,6 +110,11 @@ describe("MabesiAzukiNFT", function () {
     expect(await cc.tokenURI(tokenId)).to.equal("ipfs://QmPbCf6w9TZdVhroWyBZ6LY2cDkex6Qe7eLiXG3sEUHYWF/0.json", "Can't get URI metadata");
   });
 
+  it("Should has URI contract metadata", async function () {
+    const { cc, owner, user } = await loadFixture(deployFixture);
+    expect(await cc.contractURI()).to.equal("ipfs://QmQRmf8h6SGBrfBTqBxUzDmzZAfDxjL6scV5bDBJSBmSeP", "Can't get URI contract metadata");
+  });
+
   it("Should NOT has URI metadata", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     await expect(cc.tokenURI(1)).to.be.revertedWithCustomError(cc, "URIQueryForNonexistentToken");
