@@ -18,7 +18,7 @@ contract MabesiAzukiNFT is ERC721A {
     }
 
     function burn(uint256 tokenId) external {
-        super._burn(tokenId);
+        super._burn(tokenId, true);
     }
 
     function _baseURI() internal pure override returns (string memory) {

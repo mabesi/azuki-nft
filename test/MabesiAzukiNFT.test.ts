@@ -13,17 +13,17 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should has name", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    expect(await cc.name()).to.equal("MabesiNFT", "Can't get name");
+    expect(await cc.name()).to.equal("MabesiAzukiNFT", "Can't get name");
   });
 
   it("Should has symbol", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    expect(await cc.symbol()).to.equal("MBFT", "Can't get symbol");
+    expect(await cc.symbol()).to.equal("MBAFT", "Can't get symbol");
   });
 
   it("Should mint ", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const balance = await cc.balanceOf(owner.address);
     const tokenId = 0;
     const ownerOf = await cc.ownerOf(tokenId);
@@ -36,7 +36,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await cc.burn(tokenId);
 
@@ -49,7 +49,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn (approved)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
 
@@ -68,7 +68,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should burn (approved for all)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await cc.setApprovalForAll(user.address, true);
 
@@ -87,32 +87,32 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should NOT burn (not exists)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await expect(cc.burn(1)).to.be.revertedWith("ERC721: invalid token ID");
+    await expect(cc.burn(1)).to.be.revertedWithCustomError(cc, "OwnerQueryForNonexistentToken");
   });
 
   it("Should NOT burn (permission)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     const instance = cc.connect(user);
-    await expect(instance.burn(tokenId)).to.be.revertedWith("ERC721: caller is not token owner or approved");
+    await expect(instance.burn(tokenId)).to.be.revertedWithCustomError(cc, "TransferCallerNotOwnerNorApproved");
   });
 
   it("Should has URI metadata", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
-    expect(await cc.tokenURI(tokenId)).to.equal("https://mabesinftcollection.com/nft/1.json", "Can't get URI metadata");
+    expect(await cc.tokenURI(tokenId)).to.equal("https://mabesiazukinft.com/nft/0.json", "Can't get URI metadata");
   });
 
   it("Should NOT has URI metadata", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await expect(cc.tokenURI(1)).to.be.revertedWith("ERC721: invalid token ID");
+    await expect(cc.tokenURI(1)).to.be.revertedWithCustomError(cc, "URIQueryForNonexistentToken");
   });
 
   it("Should transfer", async function () {
       const { cc, owner, user } = await loadFixture(deployFixture);
-      await cc.mint(1);
+      await cc.mint(1, {value: ethers.parseEther("0.01")});
       const tokenId = 0;
       await  cc.transferFrom(owner.address, user.address, tokenId);
 
@@ -127,7 +127,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit transfer", async function () {
       const { cc, owner, user } = await loadFixture(deployFixture);
-      await cc.mint(1);
+      await cc.mint(1, {value: ethers.parseEther("0.01")});
       const tokenId = 0;
       await expect(cc.transferFrom(owner.address, user.address, tokenId)).to
                   .emit(cc, "Transfer")
@@ -137,7 +137,7 @@ describe("MabesiAzukiNFT", function () {
   it("Should transfer (approved)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
 
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
 
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
@@ -153,7 +153,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit approval", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await expect(cc.approve(user.address, tokenId)).to
                 .emit(cc, "Approval")
@@ -162,7 +162,7 @@ describe("MabesiAzukiNFT", function () {
   
   it("Should clear approvals", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await cc.approve(user.address, tokenId);
     await  cc.transferFrom(owner.address, user.address, tokenId);
@@ -173,7 +173,7 @@ describe("MabesiAzukiNFT", function () {
   it("Should transfer (approved for all)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
 
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
 
     const tokenId = 0;
     await cc.setApprovalForAll(user.address, true);
@@ -189,7 +189,7 @@ describe("MabesiAzukiNFT", function () {
 
   it("Should emit approval for all", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     await expect(cc.setApprovalForAll(user.address, true)).to
                 .emit(cc, "ApprovalForAll")
@@ -199,19 +199,19 @@ describe("MabesiAzukiNFT", function () {
   it("Should NOT transfer (permission)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     
-    await cc.mint(1);
+    await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
     const instance = cc.connect(user);    
 
     await expect(instance.transferFrom(owner.address, user.address, tokenId)).to
-                .be.revertedWith("ERC721: caller is not token owner or approved");
+                .be.revertedWithCustomError(cc, "TransferCallerNotOwnerNorApproved");
   });
 
   it("Should NOT transfer (token not exists)", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     
     await expect(cc.transferFrom(owner.address, user.address, 1)).to
-                .be.revertedWith("ERC721: invalid token ID");
+                .be.revertedWithCustomError(cc, "OwnerQueryForNonexistentToken");
   });
 
   it("Should supports interface", async function () {
