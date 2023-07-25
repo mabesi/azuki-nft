@@ -9,11 +9,11 @@ contract MabesiAzukiNFT is ERC721A {
     address payable private _owner;
 
     constructor() ERC721A("MabesiAzukiNFT", "MBAFT") {
-        _owner = payable msg.sender;
+        _owner = payable(msg.sender);
     }
 
     function mint(uint256 quantity) public payable {
-        require(msg.value >= 0.01 * quantity, "Insufficient payment");
+        require(msg.value >= (0.01 ether * quantity), "Insufficient payment");
         _mint(msg.sender, quantity);
     }
 
