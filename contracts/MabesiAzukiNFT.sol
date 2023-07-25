@@ -22,7 +22,7 @@ contract MabesiAzukiNFT is ERC721A {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://mabesiazukinft.com/nft/";
+        return "ipfs://QmPbCf6w9TZdVhroWyBZ6LY2cDkex6Qe7eLiXG3sEUHYWF/";
     }
 
     function tokenURI(uint256 tokenId) public view override(ERC721A) returns (string memory) {

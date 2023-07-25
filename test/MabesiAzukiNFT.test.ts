@@ -107,7 +107,7 @@ describe("MabesiAzukiNFT", function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     await cc.mint(1, {value: ethers.parseEther("0.01")});
     const tokenId = 0;
-    expect(await cc.tokenURI(tokenId)).to.equal("https://mabesiazukinft.com/nft/0.json", "Can't get URI metadata");
+    expect(await cc.tokenURI(tokenId)).to.equal("ipfs://QmPbCf6w9TZdVhroWyBZ6LY2cDkex6Qe7eLiXG3sEUHYWF/0.json", "Can't get URI metadata");
   });
 
   it("Should NOT has URI metadata", async function () {
