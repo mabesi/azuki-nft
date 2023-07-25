@@ -21,7 +21,7 @@ describe("MabesiAzukiNFT", function () {
     expect(await cc.symbol()).to.equal("MBAFT", "Can't get symbol");
   });
 
-  it("Should mint ", async function () {
+  it("Should mint", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     await cc.mint(1, {value: ethers.parseEther("0.01")});
     const balance = await cc.balanceOf(owner.address);
@@ -32,6 +32,11 @@ describe("MabesiAzukiNFT", function () {
     expect(balance).to.equal(1, "Can't mint (balance)");
     expect(ownerOf).to.equal(owner.address, "Can't mint (ownerOf)");
     expect(totalSupply).to.equal(1, "Can't mint (totalSupply)");
+  });
+
+  it("Should NOT mint (insufficient payment)", async function () {
+    const { cc, owner, user } = await loadFixture(deployFixture);
+    expect(cc.mint(1)).to.be.revertedWith("Insufficient payment");
   });
 
   it("Should burn", async function () {
@@ -217,6 +222,31 @@ describe("MabesiAzukiNFT", function () {
   it("Should supports interface", async function () {
     const { cc, owner, user } = await loadFixture(deployFixture);
     expect(await cc.supportsInterface("0x80ac58cd")).to.equal(true,"Can't support interface");
+  });
+
+  it("Should withdraw ", async function () {
+    const { cc, owner, user } = await loadFixture(deployFixture);
+    const ownerBalanceBefore = await ethers.provider.getBalance(owner.address);
+    const instace = cc.connect(user);
+    await instace.mint(1, {value: ethers.parseEther("0.01")});
+    await cc.withdraw();
+    const ccBalance = await ethers.provider.getBalance(cc.getAddress());
+    const ownerBalanceAfter = await ethers.provider.getBalance(owner.address);
+
+    expect(ccBalance).to.equal(0, "Can't withdraw (ccBalance)");
+    expect(ownerBalanceAfter).to.greaterThan(ownerBalanceBefore, "Can't withdraw (ownerBalance)");
+  });
+
+  it("Should NOT withdraw (permission)", async function () {
+    const { cc, owner, user } = await loadFixture(deployFixture);
+    const instance = cc.connect(user);
+    await expect(instance.withdraw()).to.be.revertedWith("Caller is not owner");
+  });
+
+  it("Should NOT withdraw (failed call)", async function () {
+    const { cc, owner, user } = await loadFixture(deployFixture);
+    const instance = cc.connect(user);
+    await expect(instance.withdraw()).to.be.revertedWith("Caller is not owner");
   });
 
 }); // End Describe
