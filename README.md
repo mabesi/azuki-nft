@@ -28,11 +28,11 @@ The Azuki contract will enable minting multiple NFTs for essentially the same co
 
 ### 🛠️ Features
 
-These are the key features of an ERC-721A smart contract:
+In addition to the basic functionalities of an NFT contract, such as mint, burn, balance and transfer, these are the main features of an ERC-721A smart contract:
 
-- Optimization 1 - Removing duplicate storage from OpenZeppelin’s (OZ) ERC721Enumerable
-- Optimization 2 - updating the owner’s balance once per batch mint request, instead of per minted NFT
-- Optimization 3 - updating the owner data once per batch mint request, instead of per minted NFT
+- **Optimization 1** - Removing duplicate storage from OpenZeppelin’s (OZ) ERC721Enumerable
+- **Optimization 2** - updating the owner’s balance once per batch mint request, instead of per minted NFT
+- **Optimization 3** - updating the owner data once per batch mint request, instead of per minted NFT
 
 ### 🏗️ Built With
 
