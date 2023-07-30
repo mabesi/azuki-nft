@@ -6,8 +6,8 @@
   "scripts": {
     "test": "npx hardhat test",
     "cov": "npx hardhat coverage",
-    "deploy": "npx hardhat run scripts/deploy.ts --network avaxtest",
-    "verify": "npx hardhat verify --network avaxtest"
+    "deploy": "npx hardhat run scripts/deploy.ts --network my_rpc_chain",
+    "verify": "npx hardhat verify --network my_rpc_chain"
   },
   "keywords": [],
   "author": "Plinio Mabesi",
