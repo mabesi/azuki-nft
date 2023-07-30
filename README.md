@@ -1,6 +1,6 @@
 # Mabesi Azuki NFT Collection
 
-A personal and educational project with a complete professional NFT structure, that implements the Azuki [ERC-721A](https://www.azuki.com/erc721a).
+A personal project with a complete professional NFT structure, that implements the Azuki [ERC-721A](https://www.azuki.com/erc721a).
 
 ## :speech_balloon: Description
 
