@@ -4,9 +4,9 @@ A personal and educational project with a complete professional NFT structure, t
 
 ## :speech_balloon: Description
 
-<p align="justify">ERC-721A is an implementation of IERC721 with significant gas savings for minting multiple NFTs in a single transaction.
+<p align="justify">ERC-721A is an implementation of IERC721, made by Azuki, with significant gas savings for minting multiple NFTs in a single transaction.
 The Azuki contract will enable minting multiple NFTs for essentially the same cost of minting a single NFT.</p>
-<p align="justify">This project is a simple implementation of Azuki standard, with the most important functionalities for an NFT Smart Contract.</p>
+<p align="justify">This project is a simple implementation of Azuki ERC-721A standard, with the most important functionalities for an NFT Smart Contract, to help you save some GAS.</p>
 
 <table>
     <tr>
