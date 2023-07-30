@@ -73,8 +73,8 @@ RPC_URL=
 CHAIN_ID=
 ```
 
-Change the "MabesiAzukiNFT" for the name of your choice.
-Change the "MBAFT" for the symbol of your choice.
+Change the `"MabesiAzukiNFT"` for the name of your choice.
+Change the `"MBAFT"` for the symbol of your choice.
 
 ```solidity
     constructor() ERC721A("MabesiAzukiNFT", "MBAFT") {
@@ -82,16 +82,7 @@ Change the "MBAFT" for the symbol of your choice.
     }
 ```
 
-Change the 0.01 for the price of your choice.
-
-```solidity
-    function mint(uint256 quantity) public payable {
-        require(msg.value >= (0.01 ether * quantity), "Insufficient payment");
-        _mint(msg.sender, quantity);
-    }
-```
-
-Change the 0.01 for the price of your choice.
+Change the `0.01` for the price of your choice.
 
 ```solidity
     function mint(uint256 quantity) public payable {
