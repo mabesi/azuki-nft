@@ -73,8 +73,7 @@ RPC_URL=
 CHAIN_ID=
 ```
 
-Change the `"MabesiAzukiNFT"` for the name of your choice.
-Change the `"MBAFT"` for the symbol of your choice.
+Change the `"MabesiAzukiNFT"` and the `"MBAFT"` for the token name and symbol of your choice.
 
 ```solidity
     constructor() ERC721A("MabesiAzukiNFT", "MBAFT") {
